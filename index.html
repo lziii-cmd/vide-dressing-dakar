@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Vide-dressing Dakar</title>
+<title>Le Dressing de Nourah</title>
 <meta name="description" content="Vêtements féminins en bon état, pièces uniques. Livraison à domicile à Dakar, paiement à la livraison.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -138,7 +138,7 @@ footer{border-top:1px solid var(--line);padding-block:32px 110px;color:var(--mut
 <div class="sample" id="sample" hidden>Aperçu : photos libres de droits et prix d’exemple. Vos vraies pièces les remplaceront.</div>
 
 <nav class="nav"><div class="wrap">
-  <a class="logo" href="#top">Vide-dressing <i>Dakar</i></a>
+  <a class="logo" href="#top">Le Dressing de <i>Nourah</i></a>
   <button class="cartbtn" id="openCart" type="button" aria-label="Ouvrir le panier">Panier <span class="n" id="cartN">0</span></button>
 </div></nav>
 
@@ -171,7 +171,7 @@ footer{border-top:1px solid var(--line);padding-block:32px 110px;color:var(--mut
 </section>
 </main>
 
-<footer><div class="wrap">Vide-dressing Dakar · Commande confirmée par appel · Photos : Unsplash</div></footer>
+<footer><div class="wrap">Le Dressing de Nourah · Dakar · Commande confirmée par appel · Photos : Unsplash</div></footer>
 
 <div class="bar" id="bar"><div><b id="barTotal"></b><br><small id="barN"></small></div><button class="btn" id="barBtn" type="button">Commander</button></div>
 
@@ -282,7 +282,7 @@ function renderCart() {
 function buildMessage(f) {
   const ref = 'C' + Date.now().toString(36).slice(-5).toUpperCase();
   const items = cart.map(id => { const p = byId(id); return `- ${p.name} (taille ${p.size}) : ${fmt(p.price)}`; }).join('\n');
-  const text = `Bonjour, je souhaite commander (réf. ${ref}) :\n${items}\n\nTotal des articles : ${fmt(total())} (hors livraison)\n\nNom : ${f.nom}\nTéléphone : ${f.tel}\nAdresse : ${f.adr}` + (f.note ? `\nPrécision : ${f.note}` : '');
+  const text = `Bonjour Nourah, je souhaite commander (réf. ${ref}) :\n${items}\n\nTotal des articles : ${fmt(total())} (hors livraison)\n\nNom : ${f.nom}\nTéléphone : ${f.tel}\nAdresse : ${f.adr}` + (f.note ? `\nPrécision : ${f.note}` : '');
   return {text, url: 'https://wa.me/' + CONFIG.whatsapp.replace(/\D/g,'') + '?text=' + encodeURIComponent(text)};
 }
 
