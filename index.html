@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Vide-dressing Dakar</title>
+<meta name="description" content="Vêtements féminins en bon état, pièces uniques. Livraison à domicile à Dakar, paiement à la livraison.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+:root{
+  --bg:#F5EFE6; --surface:#FFFBF5; --fg:#1C1713; --muted:#6B5F54; --line:#E1D6C7;
+  --accent:#B4472B; --accent-fg:#FFFFFF; --ink:#1C1713; --ink-fg:#F5EFE6; --ok:#2F6B4F;
+  --font-display:'Fraunces',Georgia,serif; --font-body:'DM Sans',system-ui,sans-serif;
+  --r:14px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#16120F; --surface:#201A16; --fg:#F3EBDF; --muted:#A39685; --line:#352C25;
+  --accent:#E3704F; --accent-fg:#1A0E09; --ink:#F3EBDF; --ink-fg:#16120F; --ok:#6FC39A;
+}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--font-body);-webkit-font-smoothing:antialiased}
+button,input,select{font:inherit;color:inherit}
+img{display:block;max-width:100%}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1240px;margin-inline:auto;padding-inline:20px}
+.sample{background:var(--ink);color:var(--ink-fg);font-size:13px;text-align:center;padding:8px 16px}
+
+/* Navigation */
+.nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:var(--font-display);font-weight:700;font-size:22px;letter-spacing:-.01em;text-decoration:none;color:inherit}
+.logo i{font-weight:500;color:var(--accent)}
+.cartbtn{display:flex;align-items:center;gap:10px;background:var(--ink);color:var(--ink-fg);border:0;border-radius:999px;padding:10px 18px;font-weight:700;cursor:pointer}
+.cartbtn .n{background:var(--accent);color:var(--accent-fg);border-radius:999px;min-width:22px;height:22px;display:grid;place-items:center;font-size:12px;padding-inline:6px}
+
+/* Hero */
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;padding-block:56px 40px}
+.kicker{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 16px}
+h1{font-family:var(--font-display);font-weight:700;font-size:clamp(44px,7.4vw,92px);line-height:.98;letter-spacing:-.035em;margin:0;text-wrap:balance}
+h1 em{font-weight:500;color:var(--accent)}
+.lead{font-size:18px;color:var(--muted);max-width:46ch;margin:22px 0 28px}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-fg);text-decoration:none;font-weight:700;padding:14px 26px;border-radius:999px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 22px;list-style:none;padding:0;margin:28px 0 0;font-size:14px;font-weight:500}
+.facts li::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ok);margin-right:8px}
+.mosaic{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.mosaic img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:var(--r)}
+.mosaic img:nth-child(1){grid-row:span 2;aspect-ratio:auto;height:100%}
+
+
+/* Filtres */
+.filters{position:sticky;top:64px;z-index:15;background:var(--bg);border-block:1px solid var(--line);padding-block:12px}
+.filters .wrap{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.chips{display:flex;gap:8px;overflow-x:auto;flex:1 1 100%;scrollbar-width:none;padding-bottom:2px}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1px solid var(--line);background:transparent;border-radius:999px;padding:8px 16px;cursor:pointer;font-weight:500;font-size:14px;white-space:nowrap}
+.chip small{color:var(--muted);margin-left:4px}
+.chip[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:var(--ink-fg)}
+.chip[aria-pressed=true] small{color:inherit;opacity:.7}
+.tools{display:flex;gap:8px;flex-wrap:wrap;flex:1 1 100%}
+.search{flex:1 1 200px;min-width:0}
+input,select{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:15px}
+.search input{width:100%}
+.count{margin:28px 0 18px;color:var(--muted);font-size:14px}
+
+/* Grille */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px 18px;list-style:none;margin:0;padding:0 0 120px}
+.card{min-width:0}
+.pic{position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:3/4;background:var(--line);cursor:pointer;border:0;padding:0;width:100%;display:block}
+.pic img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.pic:hover img{transform:scale(1.04)}
+.tag{position:absolute;top:10px;left:10px;background:var(--surface);color:var(--fg);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px}
+.sold .pic img{opacity:.45;filter:grayscale(.6)}
+.quick{position:absolute;right:10px;bottom:10px;width:44px;height:44px;border-radius:50%;border:0;background:var(--surface);color:var(--fg);display:grid;place-items:center;cursor:pointer;font-size:22px;line-height:1;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+.quick[aria-pressed=true]{background:var(--accent);color:var(--accent-fg)}
+.info{padding-top:12px}
+.name{font-weight:500;font-size:15px;line-height:1.35;margin:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.meta{margin:2px 0 0;color:var(--muted);font-size:13px}
+.price{font-family:var(--font-display);font-weight:700;font-size:19px;margin-top:6px;font-variant-numeric:tabular-nums}
+.empty{padding:60px 0;color:var(--muted);text-align:center}
+
+/* Tiroirs */
+.overlay{position:fixed;inset:0;background:rgba(20,14,10,.55);z-index:40;display:flex;justify-content:flex-end}
+.overlay[hidden]{display:none}
+.panel{background:var(--bg);width:min(480px,100%);height:100%;overflow-y:auto;padding:22px 20px calc(28px + env(safe-area-inset-bottom,0px));display:grid;gap:18px;align-content:start;animation:slide .25s ease}
+@keyframes slide{from{transform:translateX(24px);opacity:0}}
+.ph{display:flex;justify-content:space-between;align-items:center}
+.ph h2{font-family:var(--font-display);font-size:28px;margin:0}
+.x{background:transparent;border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer}
+.lines{list-style:none;margin:0;padding:0}
+.lines li{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;padding-block:12px;border-bottom:1px solid var(--line)}
+.lines img{width:64px;height:80px;object-fit:cover;border-radius:8px}
+.lines b{display:block;font-weight:500;font-size:14px;line-height:1.3}
+.lines span{color:var(--muted);font-size:13px}
+.rm{background:none;border:0;color:var(--accent);text-decoration:underline;cursor:pointer;font-size:13px;display:block;margin-top:4px;margin-left:auto}
+.total{display:flex;justify-content:space-between;font-weight:700;font-size:18px}
+.note{color:var(--muted);font-size:13px;margin:0}
+form{display:grid;gap:12px}
+label{display:grid;gap:4px;font-size:13px;font-weight:700}
+label input,label textarea{font-weight:400;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:11px 12px;font:inherit;font-size:15px;color:inherit}
+textarea{resize:vertical;min-height:64px}
+.err{color:var(--accent);font-size:13px;margin:0}
+.btn{border:1px solid var(--accent);background:var(--accent);color:var(--accent-fg);border-radius:999px;padding:12px 22px;font-weight:700;cursor:pointer;text-decoration:none;text-align:center;display:inline-block}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.done{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px;display:grid;gap:10px}
+.done p{margin:0}.done textarea{min-height:130px;font-size:13px}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+
+/* Aperçu rapide */
+.modal{align-items:center;justify-content:center;padding:16px}
+.qv{background:var(--bg);border-radius:20px;max-width:880px;width:100%;max-height:92vh;overflow:auto;display:grid;grid-template-columns:1fr 1fr;animation:pop .22s ease}
+@keyframes pop{from{transform:scale(.97);opacity:0}}
+.qv img{width:100%;height:100%;object-fit:cover;min-height:360px;max-height:92vh}
+.qv .txt{padding:28px;display:flex;flex-direction:column;gap:12px}
+.qv h3{font-family:var(--font-display);font-size:28px;line-height:1.15;margin:0}
+.qv dl{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;margin:0;font-size:15px}
+.qv dt{color:var(--muted)}.qv dd{margin:0;font-weight:500}
+.qv .price{font-size:30px;margin:6px 0}
+.qv .x{align-self:flex-end}
+
+/* Barre mobile */
+.bar{position:fixed;inset-inline:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:30;background:var(--ink);color:var(--ink-fg);border-radius:999px;padding:10px 10px 10px 22px;display:none;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 8px 28px rgba(0,0,0,.28)}
+.bar.on{display:flex}
+.bar b{font-family:var(--font-display);font-size:18px}
+.bar .btn{padding:10px 20px}
+footer{border-top:1px solid var(--line);padding-block:32px 110px;color:var(--muted);font-size:14px}
+
+@media(max-width:1000px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:820px){.hero{grid-template-columns:1fr;padding-block:32px 24px;gap:28px}.mosaic{max-width:420px}.qv{grid-template-columns:1fr}.qv img{min-height:0;max-height:46vh}}
+@media(max-width:620px){.grid{grid-template-columns:repeat(2,1fr);gap:24px 12px}.wrap{padding-inline:16px}.name{font-size:14px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="sample" id="sample" hidden>Aperçu : photos libres de droits et prix d’exemple. Vos vraies pièces les remplaceront.</div>
+
+<nav class="nav"><div class="wrap">
+  <a class="logo" href="#top">Vide-dressing <i>Dakar</i></a>
+  <button class="cartbtn" id="openCart" type="button" aria-label="Ouvrir le panier">Panier <span class="n" id="cartN">0</span></button>
+</div></nav>
+
+<main id="top">
+<section class="wrap hero">
+  <div>
+    <p class="kicker">Mode féminine · Pièces uniques</p>
+    <h1>Des pièces choisies, <em>déjà aimées.</em></h1>
+    <p class="lead">Robes, jeans, manteaux et sandales en bon état. Chaque pièce n’existe qu’une fois : quand elle est partie, elle est partie.</p>
+    <a class="cta" href="#catalogue">Voir la sélection →</a>
+    <ul class="facts"><li>Livraison à domicile</li><li id="pay">Paiement à la livraison</li><li>Confirmation par appel</li></ul>
+  </div>
+  <div class="mosaic" id="mosaic" aria-hidden="true"></div>
+</section>
+
+<section id="catalogue">
+  <div class="filters"><div class="wrap">
+    <div class="chips" id="chips" role="group" aria-label="Catégories"></div>
+    <div class="tools">
+      <div class="search"><input id="q" type="search" placeholder="Rechercher : jean, robe longue, beige…" aria-label="Rechercher"></div>
+      <select id="sizeSel" aria-label="Taille"></select>
+      <select id="sortSel" aria-label="Tri"><option value="new">Nouveautés</option><option value="asc">Prix croissant</option><option value="desc">Prix décroissant</option></select>
+    </div>
+  </div></div>
+  <div class="wrap">
+    <p class="count" id="count" aria-live="polite"></p>
+    <ul class="grid" id="grid"></ul>
+    <p class="empty" id="empty" hidden>Aucune pièce ne correspond. Essayez un autre filtre.</p>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">Vide-dressing Dakar · Commande confirmée par appel · Photos : Unsplash</div></footer>
+
+<div class="bar" id="bar"><div><b id="barTotal"></b><br><small id="barN"></small></div><button class="btn" id="barBtn" type="button">Commander</button></div>
+
+<div class="overlay" id="overlay" hidden>
+  <aside class="panel" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+    <div class="ph"><h2 id="cartTitle">Votre commande</h2><button class="x" id="closeCart" type="button">Fermer</button></div>
+    <div id="cartBody"></div>
+  </aside>
+</div>
+
+<div class="overlay modal" id="modal" hidden>
+  <div class="qv" role="dialog" aria-modal="true" aria-labelledby="qvName" id="qv"></div>
+</div>
+
+<script>
+const CONFIG = {
+  // Numéro WhatsApp qui reçoit les commandes, format international sans + ni espaces (ex. 221770000000).
+  whatsapp: "221772799971",
+  payment: "Paiement à la livraison",
+  sample: true
+};
+const CATS = ["Robes", "Hauts", "Pantalons", "Jupes", "Ensembles", "Vestes", "Chaussures", "Sacs"];
+const HERO = ["ensemble-03", "robe-02", "veste-03"];
+const PRODUCTS = [{"id": "pantalon-11", "name": "Jean bleu taille haute, vu de dos", "cat": "Pantalons", "size": "40", "cond": "Neuf avec étiquette", "price": 7000, "fresh": true, "sold": false}, {"id": "robe-18", "name": "Robe longue lilas à épaules dénudées", "cat": "Robes", "size": "M", "cond": "Très bon état", "price": 10000, "fresh": true, "sold": false}, {"id": "pantalon-04", "name": "Jean bleu clair coupe droite, taille haute", "cat": "Pantalons", "size": "38", "cond": "Neuf avec étiquette", "price": 8000, "fresh": true, "sold": false}, {"id": "robe-01", "name": "Robe sans manches rose à fleurs, sur jupon lilas", "cat": "Robes", "size": "S", "cond": "Comme neuf", "price": 8000, "fresh": true, "sold": false}, {"id": "sac-11", "name": "Petit sac blanc et beige à chaîne, porté avec un trench", "cat": "Sacs", "size": "Unique", "cond": "Comme neuf", "price": 6000, "fresh": true, "sold": false}, {"id": "jupe-03", "name": "Jupe midi à fleurs bleues sur fond blanc, bas à bordure", "cat": "Jupes", "size": "L", "cond": "Très bon état", "price": 7000, "fresh": true, "sold": false}, {"id": "pantalon-05", "name": "Jean noir délavé très large, fendu sur les côtés", "cat": "Pantalons", "size": "38", "cond": "Bon état", "price": 7000, "fresh": true, "sold": false}, {"id": "haut-05", "name": "Haut noir à petites fleurs, encolure carrée et manches longues", "cat": "Hauts", "size": "S", "cond": "Bon état", "price": 5000, "fresh": true, "sold": false}, {"id": "haut-02", "name": "Haut rouge à petites fleurs blanches, col V et bas à nouer", "cat": "Hauts", "size": "S", "cond": "Neuf avec étiquette", "price": 3000, "fresh": false, "sold": false}, {"id": "ensemble-02", "name": "Ensemble chemise et pantalon larges à grandes fleurs noires et beiges", "cat": "Ensembles", "size": "M", "cond": "Comme neuf", "price": 12000, "fresh": false, "sold": false}, {"id": "veste-02", "name": "Surchemise beige oversize ouverte sur un top noir", "cat": "Vestes", "size": "L", "cond": "Très bon état", "price": 11000, "fresh": false, "sold": false}, {"id": "pantalon-14", "name": "Pantalon slim blanc taille haute, longueur cheville", "cat": "Pantalons", "size": "38", "cond": "Bon état", "price": 8000, "fresh": false, "sold": false}, {"id": "robe-02", "name": "Robe noire à bretelles et grandes fleurs rouges", "cat": "Robes", "size": "S", "cond": "Très bon état", "price": 9000, "fresh": false, "sold": true}, {"id": "chaussures-12", "name": "Sandales dorées métallisées à brides et talon aiguille", "cat": "Chaussures", "size": "40", "cond": "Neuf avec étiquette", "price": 7000, "fresh": false, "sold": false}, {"id": "pantalon-10", "name": "Jean bleu clair droit, longueur cheville", "cat": "Pantalons", "size": "36", "cond": "Bon état", "price": 9000, "fresh": false, "sold": false}, {"id": "veste-11", "name": "Manteau bleu marine à revers", "cat": "Vestes", "size": "L", "cond": "Bon état", "price": 13000, "fresh": false, "sold": false}, {"id": "robe-11", "name": "Robe mi-longue à petites fleurs, manches longues et ceinture", "cat": "Robes", "size": "L", "cond": "Bon état", "price": 7000, "fresh": false, "sold": false}, {"id": "chaussures-01", "name": "Sandales nude à talon aiguille et nœud strassé", "cat": "Chaussures", "size": "38", "cond": "Comme neuf", "price": 6000, "fresh": false, "sold": false}, {"id": "robe-17", "name": "Robe beige à bretelles, buste smocké et bas en dentelle", "cat": "Robes", "size": "S", "cond": "Très bon état", "price": 11000, "fresh": false, "sold": false}, {"id": "sac-02", "name": "Sac à main rayé en bandes beige, rouge et marron à boucles dorées", "cat": "Sacs", "size": "Unique", "cond": "Comme neuf", "price": 13000, "fresh": false, "sold": false}, {"id": "chaussures-05", "name": "Sandales noires à brides croisées et talon aiguille", "cat": "Chaussures", "size": "38", "cond": "Très bon état", "price": 7000, "fresh": false, "sold": false}, {"id": "veste-05", "name": "Trench kaki fluide", "cat": "Vestes", "size": "M", "cond": "Très bon état", "price": 14000, "fresh": false, "sold": false}, {"id": "haut-06", "name": "Blouse blanche froncée à épaules dénudées", "cat": "Hauts", "size": "L", "cond": "Très bon état", "price": 5000, "fresh": false, "sold": false}, {"id": "haut-03", "name": "Blouse blanche en broderie anglaise, coupe évasée", "cat": "Hauts", "size": "S", "cond": "Neuf avec étiquette", "price": 3000, "fresh": false, "sold": false}, {"id": "robe-06", "name": "Robe longue bleu clair, col licou, ceinture à nouer", "cat": "Robes", "size": "M", "cond": "Neuf avec étiquette", "price": 9000, "fresh": false, "sold": false}, {"id": "ensemble-06", "name": "Ensemble rose : tunique à manches 3/4 et pantalon assorti, motifs de fleurs crème", "cat": "Ensembles", "size": "M", "cond": "Bon état", "price": 15000, "fresh": false, "sold": true}, {"id": "veste-03", "name": "Manteau camel long ceinturé", "cat": "Vestes", "size": "M", "cond": "Bon état", "price": 14000, "fresh": false, "sold": false}, {"id": "ensemble-01", "name": "Jogging jaune : sweat court à capuche et pantalon à poignets", "cat": "Ensembles", "size": "S", "cond": "Très bon état", "price": 10000, "fresh": false, "sold": false}, {"id": "veste-06", "name": "Manteau camel croisé et ceinturé", "cat": "Vestes", "size": "M", "cond": "Bon état", "price": 10000, "fresh": false, "sold": false}, {"id": "chaussures-07", "name": "Sandales violettes à lanières croisées et talon aiguille", "cat": "Chaussures", "size": "37", "cond": "Très bon état", "price": 9000, "fresh": false, "sold": false}, {"id": "veste-01", "name": "Manteau camel droit, porté sur une robe en maille gris-vert", "cat": "Vestes", "size": "M", "cond": "Comme neuf", "price": 8000, "fresh": false, "sold": false}, {"id": "pantalon-01", "name": "Pantalon large rose fuchsia taille haute, vu de profil", "cat": "Pantalons", "size": "40", "cond": "Très bon état", "price": 9000, "fresh": false, "sold": false}, {"id": "haut-01", "name": "Blouse blanche à épaules dénudées et manches bouffantes à volants", "cat": "Hauts", "size": "S", "cond": "Très bon état", "price": 3000, "fresh": false, "sold": false}, {"id": "chaussures-11", "name": "Sandales noires vernies à brides et talon aiguille", "cat": "Chaussures", "size": "37", "cond": "Très bon état", "price": 9000, "fresh": false, "sold": false}, {"id": "pantalon-03", "name": "Jean bleu foncé à patchs et déchirure au genou", "cat": "Pantalons", "size": "38", "cond": "Très bon état", "price": 7000, "fresh": false, "sold": false}, {"id": "robe-14", "name": "Robe longue vert sauge à bretelles, taille élastique, vue de dos", "cat": "Robes", "size": "M", "cond": "Neuf avec étiquette", "price": 8000, "fresh": false, "sold": false}, {"id": "robe-04", "name": "Robe midi satinée vert kaki, portée sous un manteau camel", "cat": "Robes", "size": "M", "cond": "Comme neuf", "price": 6000, "fresh": false, "sold": false}, {"id": "jupe-02", "name": "Jupe longue plissée blanche, fluide", "cat": "Jupes", "size": "M", "cond": "Bon état", "price": 7000, "fresh": false, "sold": false}, {"id": "chaussures-10", "name": "Sandales noir et nude à brides croisées et talon aiguille", "cat": "Chaussures", "size": "40", "cond": "Très bon état", "price": 5000, "fresh": false, "sold": true}, {"id": "ensemble-03", "name": "Ensemble rose : tunique à col V et pantalon assorti, motifs de fleurs crème", "cat": "Ensembles", "size": "S", "cond": "Comme neuf", "price": 14000, "fresh": false, "sold": false}, {"id": "sac-03", "name": "Sac structuré gris à poignées noires et bandoulière", "cat": "Sacs", "size": "Unique", "cond": "Bon état", "price": 8000, "fresh": false, "sold": false}, {"id": "haut-04", "name": "Chemisier rose fleuri à col et nœud", "cat": "Hauts", "size": "L", "cond": "Comme neuf", "price": 4000, "fresh": false, "sold": false}, {"id": "sac-04", "name": "Sac en cuir marron grainé à anse noire, gros plan", "cat": "Sacs", "size": "Unique", "cond": "Très bon état", "price": 14000, "fresh": false, "sold": false}, {"id": "pantalon-12", "name": "Jean ample coupe mom, bas retroussé", "cat": "Pantalons", "size": "36", "cond": "Neuf avec étiquette", "price": 7000, "fresh": false, "sold": false}, {"id": "ensemble-05", "name": "Ensemble chemise et pantalon à imprimé vert et jaune", "cat": "Ensembles", "size": "L", "cond": "Comme neuf", "price": 13000, "fresh": false, "sold": false}, {"id": "pantalon-09", "name": "Jean bleu slim, porté assis", "cat": "Pantalons", "size": "40", "cond": "Très bon état", "price": 6000, "fresh": false, "sold": false}, {"id": "veste-08", "name": "Veste en jean clair", "cat": "Vestes", "size": "L", "cond": "Très bon état", "price": 13000, "fresh": false, "sold": false}, {"id": "chaussures-04", "name": "Mules à talon carré, lilas et bleu ciel", "cat": "Chaussures", "size": "38", "cond": "Neuf avec étiquette", "price": 6000, "fresh": false, "sold": false}, {"id": "jupe-01", "name": "Jupe longue rouge à pois blancs, taille élastique", "cat": "Jupes", "size": "S", "cond": "Bon état", "price": 5000, "fresh": false, "sold": false}, {"id": "veste-04", "name": "Veste kaki ample à poches, style militaire", "cat": "Vestes", "size": "M", "cond": "Neuf avec étiquette", "price": 15000, "fresh": false, "sold": false}, {"id": "sac-10", "name": "Sac bowling à monogramme marron et anses beiges", "cat": "Sacs", "size": "Unique", "cond": "Comme neuf", "price": 6000, "fresh": false, "sold": false}, {"id": "pantalon-08", "name": "Jean bleu droit à ourlet brut", "cat": "Pantalons", "size": "38", "cond": "Bon état", "price": 7000, "fresh": false, "sold": true}, {"id": "veste-10", "name": "Manteau long rose poudré, avec pantalon assorti", "cat": "Vestes", "size": "M", "cond": "Neuf avec étiquette", "price": 13000, "fresh": false, "sold": false}, {"id": "pantalon-06", "name": "Jean bleu clair taille haute, vu de dos", "cat": "Pantalons", "size": "38", "cond": "Très bon état", "price": 7000, "fresh": false, "sold": false}, {"id": "sac-06", "name": "Trois cabas : gris effet croco, beige et marron", "cat": "Sacs", "size": "Unique", "cond": "Très bon état", "price": 7000, "fresh": false, "sold": false}, {"id": "haut-07", "name": "Blouse bleu clair à manches courtes et col brodé", "cat": "Hauts", "size": "S", "cond": "Bon état", "price": 4000, "fresh": false, "sold": false}, {"id": "robe-19", "name": "Robe moulante noire mi-longue à fines bretelles", "cat": "Robes", "size": "M", "cond": "Très bon état", "price": 9000, "fresh": false, "sold": false}, {"id": "chaussures-06", "name": "Sandales compensées à motif fleuri, semelle caramel", "cat": "Chaussures", "size": "37", "cond": "Bon état", "price": 10000, "fresh": false, "sold": false}, {"id": "chaussures-03", "name": "Sandales noires à bride de cheville et talon haut", "cat": "Chaussures", "size": "39", "cond": "Comme neuf", "price": 10000, "fresh": false, "sold": false}, {"id": "pantalon-07", "name": "Jean bleu clair coupe droite, vu de dos", "cat": "Pantalons", "size": "36", "cond": "Bon état", "price": 6000, "fresh": false, "sold": false}, {"id": "robe-03", "name": "Robe rouge brique à manches bouffantes lacées", "cat": "Robes", "size": "M", "cond": "Très bon état", "price": 9000, "fresh": false, "sold": false}, {"id": "robe-15", "name": "Robe rouge à fleurs sous kimono léger, vue de dos", "cat": "Robes", "size": "L", "cond": "Très bon état", "price": 6000, "fresh": false, "sold": false}, {"id": "veste-07", "name": "Trench beige à boutons noirs et ceinture", "cat": "Vestes", "size": "L", "cond": "Bon état", "price": 14000, "fresh": false, "sold": false}, {"id": "sac-07", "name": "Sac jaune effet croco à rabat", "cat": "Sacs", "size": "Unique", "cond": "Très bon état", "price": 8000, "fresh": false, "sold": false}, {"id": "sac-09", "name": "Sac rouge et bleu marine à rabat et fermoir doré", "cat": "Sacs", "size": "Unique", "cond": "Comme neuf", "price": 8000, "fresh": false, "sold": true}, {"id": "sac-08", "name": "Petit cabas beige à motif de tigre", "cat": "Sacs", "size": "Unique", "cond": "Très bon état", "price": 13000, "fresh": false, "sold": false}, {"id": "haut-09", "name": "Chemise beige ample à poches poitrine et manches longues", "cat": "Hauts", "size": "L", "cond": "Très bon état", "price": 4000, "fresh": false, "sold": false}, {"id": "robe-16", "name": "Robe droite en lin beige, sans manches", "cat": "Robes", "size": "L", "cond": "Neuf avec étiquette", "price": 7000, "fresh": false, "sold": false}, {"id": "sac-01", "name": "Pochette portefeuille noire, tenue à la main", "cat": "Sacs", "size": "Unique", "cond": "Comme neuf", "price": 7000, "fresh": false, "sold": false}, {"id": "ensemble-08", "name": "Ensemble en cuir gris : gilet sans manches et jupe évasée à volant", "cat": "Ensembles", "size": "L", "cond": "Très bon état", "price": 15000, "fresh": false, "sold": false}, {"id": "chaussures-09", "name": "Sandales argentées à brides fines et talon aiguille", "cat": "Chaussures", "size": "38", "cond": "Très bon état", "price": 5000, "fresh": false, "sold": false}, {"id": "pantalon-02", "name": "Short en jean blanc, porté avec un haut bleu", "cat": "Pantalons", "size": "38", "cond": "Très bon état", "price": 7000, "fresh": false, "sold": false}, {"id": "robe-09", "name": "Robe courte blanche à manches longues et ceinture", "cat": "Robes", "size": "L", "cond": "Très bon état", "price": 12000, "fresh": false, "sold": false}, {"id": "ensemble-07", "name": "Ensemble en crochet blanc : haut noué et jupe courte", "cat": "Ensembles", "size": "L", "cond": "Très bon état", "price": 13000, "fresh": false, "sold": false}, {"id": "ensemble-09", "name": "Combinaison orange ample, portée avec une chemise blanche oversize", "cat": "Ensembles", "size": "L", "cond": "Bon état", "price": 11000, "fresh": false, "sold": false}, {"id": "robe-12", "name": "Robe courte blanc cassé à manches larges, ceinture en corde", "cat": "Robes", "size": "S", "cond": "Très bon état", "price": 9000, "fresh": false, "sold": false}, {"id": "robe-05", "name": "Robe longue bustier rayée bleu et blanc, bas à volant", "cat": "Robes", "size": "L", "cond": "Neuf avec étiquette", "price": 12000, "fresh": false, "sold": false}, {"id": "haut-08", "name": "Chemisier blanc rayé à manches longues, coupe peplum", "cat": "Hauts", "size": "L", "cond": "Bon état", "price": 4000, "fresh": false, "sold": true}, {"id": "veste-09", "name": "Trench beige porté sur un blazer gris", "cat": "Vestes", "size": "M", "cond": "Neuf avec étiquette", "price": 8000, "fresh": false, "sold": false}, {"id": "robe-08", "name": "Robe longue blanche drapée, bustier, fond terracotta", "cat": "Robes", "size": "M", "cond": "Très bon état", "price": 10000, "fresh": false, "sold": false}, {"id": "chaussures-08", "name": "Sandales kaki et rose à talon, détail pompon fourrure", "cat": "Chaussures", "size": "37", "cond": "Très bon état", "price": 6000, "fresh": false, "sold": false}, {"id": "jupe-04", "name": "Jupe crayon blanche en jean, broderies sur le côté", "cat": "Jupes", "size": "S", "cond": "Bon état", "price": 4000, "fresh": false, "sold": false}, {"id": "robe-13", "name": "Robe-chemise terracotta boutonnée, ceinture à nouer", "cat": "Robes", "size": "L", "cond": "Comme neuf", "price": 8000, "fresh": false, "sold": false}, {"id": "chaussures-02", "name": "Sandales dorées ajourées à talon haut, portées avec un jean retroussé", "cat": "Chaussures", "size": "40", "cond": "Comme neuf", "price": 9000, "fresh": false, "sold": false}, {"id": "robe-10", "name": "Robe longue noire dos nu, découpe à la taille et fente", "cat": "Robes", "size": "S", "cond": "Très bon état", "price": 7000, "fresh": false, "sold": false}, {"id": "robe-07", "name": "Robe courte blanche plissée, col V et manches évasées", "cat": "Robes", "size": "M", "cond": "Comme neuf", "price": 12000, "fresh": false, "sold": false}, {"id": "sac-05", "name": "Sac en cuir cognac à boucles et clous métalliques", "cat": "Sacs", "size": "Unique", "cond": "Neuf avec étiquette", "price": 13000, "fresh": false, "sold": false}, {"id": "ensemble-04", "name": "Ensemble turquoise à motifs : tunique et pantalon large", "cat": "Ensembles", "size": "L", "cond": "Comme neuf", "price": 10000, "fresh": false, "sold": false}, {"id": "robe-20", "name": "Robe noire à gros pois blancs et manches papillon", "cat": "Robes", "size": "M", "cond": "Très bon état", "price": 10000, "fresh": false, "sold": false}, {"id": "pantalon-13", "name": "Jean skinny bleu délavé à déchirure au genou", "cat": "Pantalons", "size": "40", "cond": "Neuf avec étiquette", "price": 9000, "fresh": false, "sold": false}];
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt = n => n.toLocaleString('fr-FR').replace(/[  ]/g,' ') + ' FCFA';
+const byId = id => PRODUCTS.find(p => p.id === id);
+const img = p => `collection/${p.id}/image.jpg`;
+
+let cat = 'Tout', size = 'Toutes', sort = 'new', query = '', cart = [], lastOrder = null;
+try { cart = JSON.parse(localStorage.getItem('vd-cart2') || '[]').filter(id => { const p = byId(id); return p && !p.sold; }); } catch (e) {}
+const save = () => { try { localStorage.setItem('vd-cart2', JSON.stringify(cart)); } catch (e) {} };
+
+$('sample').hidden = !CONFIG.sample;
+$('pay').textContent = CONFIG.payment;
+$('mosaic').innerHTML = HERO.map(id => `<img src="collection/${id}/image.jpg" alt="" loading="eager">`).join('');
+
+const cats = ['Tout', ...CATS];
+$('chips').innerHTML = cats.map(c => {
+  const n = c==='Tout' ? PRODUCTS.filter(p=>!p.sold).length : PRODUCTS.filter(p=>p.cat===c && !p.sold).length;
+  return `<button class="chip" type="button" data-cat="${esc(c)}" aria-pressed="${c===cat}">${esc(c)}<small>${n}</small></button>`;
+}).join('');
+const sizes = ['Toutes', ...Array.from(new Set(PRODUCTS.map(p => p.size)))];
+$('sizeSel').innerHTML = sizes.map(s => `<option value="${esc(s)}">${s==='Toutes' ? 'Toutes les tailles' : 'Taille ' + esc(s)}</option>`).join('');
+
+function visible() {
+  const q = query.trim().toLowerCase();
+  let l = PRODUCTS.filter(p => (cat==='Tout' || p.cat===cat) && (size==='Toutes' || p.size===size) && (!q || (p.name+' '+p.cat).toLowerCase().includes(q)));
+  if (sort==='asc') l = l.slice().sort((a,b) => a.price-b.price);
+  if (sort==='desc') l = l.slice().sort((a,b) => b.price-a.price);
+  return l;
+}
+
+function renderGrid() {
+  const l = visible(), free = l.filter(p => !p.sold).length;
+  $('count').textContent = free + (free>1 ? ' pièces disponibles' : ' pièce disponible');
+  $('empty').hidden = l.length > 0;
+  $('grid').innerHTML = l.map((p,i) => {
+    const inCart = cart.includes(p.id);
+    return `<li class="card${p.sold?' sold':''}">
+      <div style="position:relative">
+        <button class="pic" type="button" data-open="${p.id}" aria-label="Voir : ${esc(p.name)}"><img src="${img(p)}" alt="${esc(p.name)}" ${i>7?'loading="lazy"':''} width="600" height="800">
+          ${p.sold?'<span class="tag">Vendu</span>':p.fresh?'<span class="tag">Nouveau</span>':''}</button>
+        ${p.sold?'':`<button class="quick" type="button" data-toggle="${p.id}" aria-pressed="${inCart}" aria-label="${inCart?'Retirer du panier':'Ajouter au panier'}">${inCart?'✓':'+'}</button>`}
+      </div>
+      <div class="info"><h3 class="name">${esc(p.name)}</h3><p class="meta">Taille ${esc(p.size)} · ${esc(p.cond)}</p><div class="price">${fmt(p.price)}</div></div></li>`;
+  }).join('');
+}
+
+const total = () => cart.reduce((s,id) => s + byId(id).price, 0);
+function renderBar() {
+  const n = cart.length;
+  $('cartN').textContent = n;
+  $('bar').classList.toggle('on', n > 0);
+  $('barTotal').textContent = fmt(total());
+  $('barN').textContent = n + (n>1 ? ' articles' : ' article');
+}
+function toggle(id) {
+  const i = cart.indexOf(id);
+  if (i >= 0) cart.splice(i,1); else cart.push(id);
+  lastOrder = null; save(); renderGrid(); renderBar();
+  if (!$('overlay').hidden) renderCart();
+}
+
+function renderCart() {
+  if (!cart.length) { $('cartBody').innerHTML = `<p class="note">Votre panier est vide. Appuyez sur « + » sur une pièce pour l’ajouter.</p>`; return; }
+  const lines = cart.map(id => { const p = byId(id);
+    return `<li><img src="${img(p)}" alt=""><div><b>${esc(p.name)}</b><span>Taille ${esc(p.size)}</span></div>
+      <div><span>${fmt(p.price)}</span><button class="rm" type="button" data-rm="${p.id}">Retirer</button></div></li>`; }).join('');
+  const done = lastOrder ? `<div class="done" id="done"><p><b>Votre message est prêt.</b> WhatsApp s’ouvre : appuyez sur « Envoyer » pour transmettre la commande. Nous vous appelons ensuite pour confirmer.</p>
+    <div class="row"><a class="btn" href="${esc(lastOrder.url)}" target="_blank" rel="noopener">Ouvrir WhatsApp</a><button class="btn ghost" type="button" id="copyMsg">Copier le texte</button></div>
+    <textarea id="msgText" readonly>${esc(lastOrder.text)}</textarea></div>` : '';
+  $('cartBody').innerHTML = `<ul class="lines">${lines}</ul>
+    <div class="total"><span>Total des articles</span><span>${fmt(total())}</span></div>
+    <p class="note">Frais de livraison confirmés à l’appel selon votre quartier. ${esc(CONFIG.payment)}.</p>
+    <form id="orderForm" novalidate>
+      <label for="f-nom">Nom et prénom<input id="f-nom" autocomplete="name" required></label>
+      <label for="f-tel">Téléphone<input id="f-tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="77 000 00 00" required></label>
+      <label for="f-adr">Adresse de livraison (quartier, repère)<textarea id="f-adr" autocomplete="street-address" required></textarea></label>
+      <label for="f-note">Précision (facultatif)<input id="f-note" placeholder="Heure de passage souhaitée…"></label>
+      <p class="err" id="err" role="alert" hidden></p>
+      <button class="btn" type="submit">Envoyer ma commande sur WhatsApp</button>
+    </form>${done}`;
+}
+
+function buildMessage(f) {
+  const ref = 'C' + Date.now().toString(36).slice(-5).toUpperCase();
+  const items = cart.map(id => { const p = byId(id); return `- ${p.name} (taille ${p.size}) : ${fmt(p.price)}`; }).join('\n');
+  const text = `Bonjour, je souhaite commander (réf. ${ref}) :\n${items}\n\nTotal des articles : ${fmt(total())} (hors livraison)\n\nNom : ${f.nom}\nTéléphone : ${f.tel}\nAdresse : ${f.adr}` + (f.note ? `\nPrécision : ${f.note}` : '');
+  return {text, url: 'https://wa.me/' + CONFIG.whatsapp.replace(/\D/g,'') + '?text=' + encodeURIComponent(text)};
+}
+
+let lastFocus = null;
+function openCart() { lastFocus = document.activeElement; $('overlay').hidden = false; renderCart(); $('closeCart').focus(); }
+function closeCart() { $('overlay').hidden = true; (lastFocus||$('openCart')).focus(); }
+function openQV(id) {
+  const p = byId(id); lastFocus = document.activeElement;
+  $('qv').innerHTML = `<img src="${img(p)}" alt="${esc(p.name)}">
+    <div class="txt"><button class="x" type="button" id="closeQV">Fermer</button>
+      <p class="kicker" style="margin:0">${esc(p.cat)}</p><h3 id="qvName">${esc(p.name)}</h3>
+      <div class="price">${fmt(p.price)}</div>
+      <dl><dt>Taille</dt><dd>${esc(p.size)}</dd><dt>État</dt><dd>${esc(p.cond)}</dd><dt>Disponibilité</dt><dd>${p.sold?'Vendu':'Pièce unique'}</dd></dl>
+      <p class="note">${esc(CONFIG.payment)}. Livraison confirmée par appel.</p>
+      <div style="margin-top:auto">${p.sold?'<button class="btn" disabled>Vendu</button>':`<button class="btn" type="button" data-toggle="${p.id}" data-qv="1">${cart.includes(p.id)?'Retirer du panier':'Ajouter au panier'}</button>`}</div></div>`;
+  $('modal').hidden = false; $('closeQV').focus();
+}
+const closeQV = () => { $('modal').hidden = true; if (lastFocus) lastFocus.focus(); };
+
+$('chips').addEventListener('click', e => { const b = e.target.closest('[data-cat]'); if (!b) return; cat = b.dataset.cat;
+  $('chips').querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', c.dataset.cat===cat)); renderGrid(); });
+$('sizeSel').addEventListener('change', e => { size = e.target.value; renderGrid(); });
+$('sortSel').addEventListener('change', e => { sort = e.target.value; renderGrid(); });
+$('q').addEventListener('input', e => { query = e.target.value; renderGrid(); });
+$('grid').addEventListener('click', e => {
+  const t = e.target.closest('[data-toggle]'); if (t) return toggle(t.dataset.toggle);
+  const o = e.target.closest('[data-open]'); if (o) openQV(o.dataset.open);
+});
+$('qv').addEventListener('click', e => {
+  if (e.target.id === 'closeQV') return closeQV();
+  const t = e.target.closest('[data-toggle]'); if (t) { toggle(t.dataset.toggle); openQV(t.dataset.toggle); }
+});
+$('modal').addEventListener('click', e => { if (e.target === $('modal')) closeQV(); });
+$('openCart').addEventListener('click', openCart);
+$('barBtn').addEventListener('click', openCart);
+$('closeCart').addEventListener('click', closeCart);
+$('overlay').addEventListener('click', e => { if (e.target === $('overlay')) closeCart(); });
+document.addEventListener('keydown', e => { if (e.key !== 'Escape') return; if (!$('modal').hidden) closeQV(); else if (!$('overlay').hidden) closeCart(); });
+
+$('cartBody').addEventListener('click', e => {
+  const rm = e.target.closest('[data-rm]'); if (rm) return toggle(rm.dataset.rm);
+  if (e.target.id === 'copyMsg') {
+    const ta = $('msgText'), fb = () => { ta.select(); e.target.textContent = 'Texte sélectionné, copiez-le'; };
+    navigator.clipboard && navigator.clipboard.writeText ? navigator.clipboard.writeText(ta.value).then(() => { e.target.textContent = 'Texte copié'; }, fb) : fb();
+  }
+});
+$('cartBody').addEventListener('submit', e => {
+  if (e.target.id !== 'orderForm') return; e.preventDefault();
+  const v = id => $(id).value.trim(), f = {nom:v('f-nom'), tel:v('f-tel'), adr:v('f-adr'), note:v('f-note')};
+  let msg = '';
+  if (!f.nom) msg = 'Indiquez votre nom.';
+  else if (f.tel.replace(/\D/g,'').length < 9) msg = 'Indiquez un numéro valide, nous vous appelons pour confirmer.';
+  else if (!f.adr) msg = 'Indiquez votre adresse de livraison.';
+  if (msg) { $('err').textContent = msg; $('err').hidden = false; return; }
+  lastOrder = buildMessage(f); renderCart();
+  $('f-nom').value=f.nom; $('f-tel').value=f.tel; $('f-adr').value=f.adr; $('f-note').value=f.note;
+  const a = document.createElement('a'); a.href = lastOrder.url; a.target = '_blank'; a.rel = 'noopener';
+  document.body.appendChild(a); a.click(); a.remove();
+  const d = $('done'); if (d) d.scrollIntoView({block:'nearest'});
+});
+
+renderGrid(); renderBar();
+</script>
+</body>
+</html>
